@@ -1,72 +1,81 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Trade Records</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-			font-size: 1.2em;
-			margin-bottom: 20px;
-		}
+    <title>Trade Records</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
 
-		th, td {
-			text-align: center;
-			padding: 8px;
-			border: 1px solid black;
-		}
+        th,
+        td {
+            text-align: center;
+            padding: 8px;
+            border: 1px solid black;
+        }
 
-		th {
-			background-color: #3c3c3c;
-			color: white;
-		}
+        th {
+            background-color: #3c3c3c;
+            color: white;
+        }
 
-		tr:nth-child(even) {
-			background-color: #f2f2f2;
-		}
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 
-		h1 {
-			text-align: center;
-		}
+        h1 {
+            text-align: center;
+        }
 
-		.profit {
-			font-weight: bold;
-			color: green;
-		}
+        .profit {
+            font-weight: bold;
+            color: green;
+        }
 
-		.loss {
-			font-weight: bold;
-			color: red;
-		}
-	</style>
+        .loss {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
 </head>
+
 <body>
-	<h1>Trade Records</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>Symbol</th>
-				<th>Buy Price</th>
-				<th>Sell Price</th>
-				<th>Buy Time</th>
-				<th>Sell Time</th>
-				<th>Profit Rate</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for row in rows %}
-			<tr>
-				<td>{{ row[1] }}</td>
-				<td>{{ row[2] }}</td>
-				<td>{{ row[3] }}</td>
-				<td>{{ row[4] }}</td>
-				<td>{{ row[5] }}</td>
-				<td class="{% if row[6] >= 0 %}profit{% else %}loss{% endif %}">
-					{{ "{:.2%}".format(row[6]) }}
-				</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <h1>Trade Records</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Buy Price</th>
+                <th>Sell Price</th>
+                <th>Buy Time</th>
+                <th>Sell Time</th>
+                <th>Profit Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                {% if row[6] == 'N/A' %}
+                <td>{{ row[6] }}</td>
+                {% else %}
+                <td class="{% if row[6] >= 0 %}profit{% else %}loss{% endif %}">
+                    {{ "{:.2%}".format(row[6] / 100) }}
+                </td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
+
 </html>
