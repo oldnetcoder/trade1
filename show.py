@@ -10,12 +10,4 @@ def index():
     c.execute('SELECT * FROM trades order by id desc')
     trades = c.fetchall()
     conn.close()
-    trades_with_profit = []
-    for trade in trades:
-        if trade[3] is not None:
-            profit_rate = round((trade[3] - trade[2]) / trade[2] * 100, 2)
-        else:
-            profit_rate = 'N/A'
-        trades_with_profit.append((trade[0], trade[1], trade[2], trade[3], trade[4], trade[5], profit_rate))
-
-    return render_template('index.html', rows=trades_with_profit)
+    return render_template('index.html', rows=trades)

@@ -54,6 +54,7 @@
                 <th>Buy Time</th>
                 <th>Sell Time</th>
                 <th>Profit Rate</th>
+                <th>fundingrate Rate</th>
             </tr>
         </thead>
         <tbody>
@@ -71,6 +72,7 @@
                     {{ "{:.2%}".format(row[6] / 100) }}
                 </td>
                 {% endif %}
+                <td>{{ "{:.2%}".format(row[7] / 100) }}</td>
 
             </tr>
             {% endfor %}
